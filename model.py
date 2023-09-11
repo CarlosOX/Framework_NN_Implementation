@@ -57,7 +57,7 @@ model_nn = tf.keras.Sequential([
     tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(256, activation ="relu"),
     tf.keras.layers.BatchNormalization(),  # <- Batch normalisation layer
-    tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Dropout(0.5),    #  <- Dropouts para redicr overfitting
     tf.keras.layers.Dense(128, activation ="relu"),
     tf.keras.layers.BatchNormalization(),  # <- Batch normalisation layer
     tf.keras.layers.Dropout(0.5),
@@ -65,7 +65,7 @@ model_nn = tf.keras.Sequential([
     tf.keras.layers.BatchNormalization(),  # <- Batch normalisation layer
     tf.keras.layers.Dropout(0.5),
     tf.keras.layers.Dense(32, activation ="relu"),
-    tf.keras.layers.Dense(1, activation='sigmoid')
+    tf.keras.layers.Dense(1, activation='sigmoid')   # Funcion sigmoid ya que es una salida BOOL
 ])
 
 # Compilar el modelo
@@ -75,6 +75,7 @@ model_nn.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accurac
 history = model_nn.fit(X_train, y_train, epochs=100, batch_size=256, verbose=2, validation_data=(X_val, y_val))
 
 # Ver el accuracy con los datos de test
+
 y_pred_nn = (model_nn.predict(X_test) > 0.5).astype(int)
 accuracy_nn = accuracy_score(y_test, y_pred_nn)
 print(f"Precisión del modelo de red neuronal en el conjunto de prueba: {accuracy_nn:.2f}")
@@ -90,11 +91,11 @@ while True:
 
     if opcion == "1":
 
-        # Código para realizar una predicción
-        # Crear la matriz de confusión
+        # Codigo para realizar una prediccion
+        # Crear la matriz de confusion
         conf_matrix = confusion_matrix(y_test, y_pred_nn)
 
-        # Gráfico de la matriz de confusión
+        # Grafico de la matriz de confusion
         plt.figure(figsize=(8, 6))
         sns.heatmap(conf_matrix, annot=True, fmt="d", cmap="Blues", cbar=False)
         plt.xlabel('Predicción')
@@ -102,7 +103,7 @@ while True:
         plt.title('Matriz de Confusión')
 
        
-        # Gráficos de pérdida y precisión en entrenamiento y validación
+        # Graficos de perdida y precision en entrenamiento y validacion
         loss = history.history['loss']
         val_loss = history.history['val_loss']
         accuracy = history.history['accuracy']
@@ -121,21 +122,19 @@ while True:
         plt.legend()
         plt.title('Accuracy vs. Epochs')
 
-        # Mostrar todos los gráficos al mismo tiempo
+        # Mostrar todos los graficos al mismo tiempo
         plt.show()
 
     elif opcion == "2":
         
 
-        def predecir_si_fue_transportado(X, modelo):
-            # Asegúrate de que X sea un arreglo NumPy y tenga la misma forma que se usó para entrenar el modelo
+        def predecir_si_fue_transportado(X, modelo):  # Esta funcion predice un valor aleatorio dado de los datos de test
+
             X = np.array(X)
-            # Si es necesario, realiza la misma escala que aplicaste en los datos de entrenamiento
-            X = scaler.transform(X)  # Asegúrate de que 'scaler' sea la instancia correcta del StandardScaler
-            # Realiza la predicción utilizando el modelo
+            X = scaler.transform(X)    
             prediccion = modelo.predict(X)
             
-            # La salida de 'modelo.predict' será una probabilidad, conviértela en una etiqueta (0 o 1)
+            # La salida de 'modelo.predict' sera una probabilidad, conviértela en una etiqueta (0 o 1)
             etiqueta_predicha = (prediccion > 0.5).astype(int)
             
             return etiqueta_predicha
@@ -143,8 +142,8 @@ while True:
 
         rdom = random.randint(1, 600)
 
-        # Ejemplo de cómo usar la función para hacer una predicción
-        nueva_entrada = X_test[rdom].reshape(1,-1)  # Reemplaza con los valores de tu nueva entrada
+
+        nueva_entrada = X_test[rdom].reshape(1,-1)  # Cambiar a la forma que acepta el modelo 
         resultado = predecir_si_fue_transportado(nueva_entrada, model_nn)
 
         if resultado[0] == 1:
