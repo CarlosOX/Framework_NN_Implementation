@@ -4,9 +4,9 @@
 
 
 
+##
 
-
-# Framework_NN_Implementation
+# Framework_NN_Implementation, EL ENTREGABLE DEL FRAMEWORK IMPLEMENTATION ES EL ARCHIVO MODEL.PY
 
 ##SPACESHIP TITANIC PREDICTION
 
