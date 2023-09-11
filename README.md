@@ -2,11 +2,11 @@
 
 # EL CODIGO DEL MODELO FINAL QUE RESPALDA EL REPORTE DE ANALISIS ESTA EN EL ARCHIVO MODELO_PCA.PY, AQUI SE HACEN LOS AJUSTED DE REGULARIZACION Y PCA
 
+PARTE DE SMA0104
 
 
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-
-##
 
 # Framework_NN_Implementation, EL ENTREGABLE DEL FRAMEWORK IMPLEMENTATION ES EL ARCHIVO MODEL.PY
 
