@@ -67,12 +67,11 @@ model_nn = tf.keras.Sequential([
     tf.keras.layers.Dense(32, activation ="relu"),
     tf.keras.layers.Dense(1, activation='sigmoid')   # Funcion sigmoid ya que es una salida BOOL
 ])
-
-# Compilar el modelo
+# Compilar el modelo 
 model_nn.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # Entrenar el modelo
-history = model_nn.fit(X_train, y_train, epochs=100, batch_size=256, verbose=2, validation_data=(X_val, y_val))
+history = model_nn.fit(X_train, y_train, epochs=80, batch_size=128, verbose=2, validation_data=(X_val, y_val))
 
 # Ver el accuracy con los datos de test
 
